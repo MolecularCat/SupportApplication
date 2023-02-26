@@ -23,5 +23,29 @@ namespace SupportApplication.Repositories
             var messages = context.Messages.ToList();
             return messages;
         }
+        public void Add(Messages messages)
+        {
+            context.Messages.Add(messages);
+            context.SaveChanges();
+        }
+        public void Delete(int id)
+        {
+            var message = context.Messages.FirstOrDefault(x => x.Id == id);
+
+            context.Messages.Remove(message);
+            context.SaveChanges();
+        }
+        public Messages Get(int id)
+        {
+            return (context.Messages.FirstOrDefault(x => x.Id == id));
+        }
+        public void Update(Messages messages)
+        {
+            context.Messages.Update(messages);
+            context.SaveChanges();
+        }
     }
 }
+
+
+//services.AddTransient<MessagesRepository>();
